@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../../Automation/TOOLS/Selenium Jars/client-combined-3.141.59.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../Automation/TOOLS/Selenium Jars/java-client-4.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../Automation/TOOLS/Selenium Jars/java-client-7.3.0.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../../../Automation/TOOLS/Selenium Jars/libs" />
+      <root url="file://$PROJECT_DIR$/../../../../../Automation/TOOLS/Selenium Jars/TestNg" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../../Automation/TOOLS/Selenium Jars/client-combined-3.141.59-sources.jar!/" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../../Automation/TOOLS/Selenium Jars/libs" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../../Automation/TOOLS/Selenium Jars/TestNg" recursive="false" />
+  </library>
+</component>
