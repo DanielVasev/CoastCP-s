@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class PLP_Test {
@@ -33,17 +34,6 @@ public class PLP_Test {
     public void Pagination() throws InterruptedException {
 
         TimeUnit.SECONDS.sleep(1);
-
-        // Welcome popUp handle
-        try {
-            WebElement popUpMess = driver.findElement(By.xpath("//a[@class='welcome-popup-shopping-btn']//span[@class='js-welcome-popup-close js-welcome-popup-close-no-message'][contains(text(),'x Close')]"));
-            popUpMess.click();
-        }
-        catch(org.openqa.selenium.StaleElementReferenceException ex)
-        {
-            WebElement popUpMess = driver.findElement(By.xpath("//a[@class='welcome-popup-shopping-btn']//span[@class='js-welcome-popup-close js-welcome-popup-close-no-message'][contains(text(),'x Close')]"));
-            popUpMess.click();
-        }
 
         // generate scroll object
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -102,11 +92,90 @@ public class PLP_Test {
         driver.get(plpDresses_Page);
     }
 
+    @Test
+    public void QuickVeiw_Button()throws InterruptedException{
+        //Generate scroll object
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        driver.get(plpDresses_Page);
+        TimeUnit.MILLISECONDS.sleep(1000);
+
+        js.executeScript("arguments[0].scrollIntoView();", PLP_Element_Objects.plp_product_image(driver));
+
+        TimeUnit.MILLISECONDS.sleep(1000);
+        Actions builder = new Actions(driver);
+        WebElement next_prod = driver.findElement(By.xpath("//li[@class='grid-tile']//div[@id='2e7bad6924c3892cfa66eda93b']//img[@class='js-required ampliance-image']"));
+        builder.moveToElement(next_prod).build().perform();
+
+        TimeUnit.MILLISECONDS.sleep(1000);
+        builder.moveToElement(PLP_Element_Objects.plp_next_Product(driver)).moveToElement(PLP_Element_Objects.PLP_QuichView_Button(driver)).build().perform();
+
+        //Assert that Quick View is displaed in the picture.
+        PLP_Element_Objects.PLP_QuichView_Button(driver).isDisplayed();
+
+                //moveToElement(HomePage_Objects.megMen_Sale_skirts(driver)).build().perform();
+
+    }
+
+    @Test
+    public void refinement_Present_AndWorks() throws InterruptedException {
+
+        //Click SortBy
+        PLP_Element_Objects.prodRef_SortBy(driver).click();
+        //Click on subMenu
+        PLP_Element_Objects.prodRef_sortBy_HighTOLow(driver).click();
+
+        //Wait for page to refresh with the add filter
+        TimeUnit.MILLISECONDS.sleep(1000);
+
+        PLP_Element_Objects.prodRef_SortBy(driver).click();
+        PLP_Element_Objects.prodRef_sortBy_LowToHigh(driver).click();
+
+        TimeUnit.MILLISECONDS.sleep(3000);
+
+        //Click on any refinement menue and choose one option from any.
+        PLP_Element_Objects.prodRef_Style(driver).click();
+        PLP_Element_Objects.rodRef_Stile_subAstile(driver).click();
+        PLP_Element_Objects.ref_bCrumb_ALine(driver).isDisplayed();
+        PLP_Element_Objects.prodRef_bc_ClearAll(driver).click();
+
+       TimeUnit.MILLISECONDS.sleep(1000);
+
+        PLP_Element_Objects.prodRef_UkSize(driver).click();
+        PLP_Element_Objects.prodRef_UkSize_size8(driver).click();
+        PLP_Element_Objects.ref_bCrumb_Size8(driver).isDisplayed();
+        PLP_Element_Objects.prodRef_bc_ClearAll(driver).click();
+
+         TimeUnit.MILLISECONDS.sleep(1000);
+
+        PLP_Element_Objects.prodRef_Colour(driver).click();
+        PLP_Element_Objects.prodRef_Coulour_Multi(driver).click();
+        PLP_Element_Objects.ref_bCrumb_Multti(driver).isDisplayed();
+        PLP_Element_Objects.prodRef_bc_ClearAll(driver).click();
+
+        TimeUnit.MILLISECONDS.sleep(1000);
+
+        PLP_Element_Objects.prodRef_Occasion(driver).click();
+        PLP_Element_Objects.prodRef_ocasion_Ocassion(driver).click();
+        PLP_Element_Objects.prodRef_bCrumb_Ocassion(driver).isDisplayed();
+        PLP_Element_Objects.prodRef_bc_ClearAll(driver).click();
+
+        TimeUnit.MILLISECONDS.sleep(1000);
+
+        PLP_Element_Objects.prodRef_Price(driver).click();
+        PLP_Element_Objects.prodRef_Price_Under60(driver).click();
+        PLP_Element_Objects.ref_bCrumb_from60(driver).isDisplayed();
+        PLP_Element_Objects.prodRef_bc_ClearAll(driver).click();
+
+        TimeUnit.MILLISECONDS.sleep(1000);
+
+    }
+
     @AfterTest
     public void finish_Test(){
 
-        driver.close();
-        driver.quit();
+       driver.close();
+       driver.quit();
 
     }
 

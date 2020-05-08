@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -49,6 +50,17 @@ class HomePageTest {
     //Scroll to the element
     // JavascriptExecutor js = (JavascriptExecutor) driver;
     // js.executeScript("arguments[0].scrollIntoView();", Name for the element locator (driver));
+
+    //HOVER WITH MOUSE OVER ELEMENT
+    //
+    public static void Hover(WebDriver driver, WebElement element){
+        Actions builder = new Actions(driver);
+        builder.moveToElement(element).perform();
+
+    }
+
+    //Actions builder = new Actions(driver);
+    //builder.moveToElement(HomePage_Objects.megMen_Sale(driver)).moveToElement(HomePage_Objects.megMen_Sale_skirts(driver)).build().perform();
 
 
 

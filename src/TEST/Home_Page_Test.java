@@ -22,13 +22,13 @@ public class Home_Page_Test {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.MICROSECONDS.SECONDS);
+        driver.get("https://www.coastfashion.com/");
 
     }
 
     @Test
     public void navigate_To_HomePage() {
 
-        driver.get("https://www.coastfashion.com/");
         String title = driver.getTitle();
         if (title.equals("Women’s Clothing & Fashion")) ;
         System.out.println(title);
@@ -39,7 +39,6 @@ public class Home_Page_Test {
     public void check_For_SearchIcon() {
         String title = "Search";
 
-        driver.get("https://www.coastfashion.com/");
         HomePage_Objects.search(driver).click();
         try {
             TimeUnit.SECONDS.sleep(1);
@@ -55,16 +54,13 @@ public class Home_Page_Test {
     @Test
     public void countrySelector() {
 
-        driver.get("https://www.coastfashion.com/");
-        WebElement countrySelector = driver.findElement(By.cssSelector("#wrapper > div.sticky-spacer.js-sticky-spacer > div > div.sticky-spacer.js-sticky-spacer > div > div > div > div.js-header-right-box.header-right-box > div.header-countryselector.hidden-on-mobile.js-country-selector.flag-icon-circle > div > div > i"));
-        countrySelector.isDisplayed();
+        HomePage_Objects.countrySelector(driver).isDisplayed();
 
     }
 
     @Test
     public void userAccount() {
 
-        driver.get("https://www.coastfashion.com/");
         HomePage_Objects.user_Profile(driver).isDisplayed();
         HomePage_Objects.user_Profile(driver).click();
         try {
@@ -104,7 +100,6 @@ public class Home_Page_Test {
     @Test
     public void wish_List() {
 
-        driver.get("https://www.coastfashion.com/");
         HomePage_Objects.wishList(driver).isDisplayed();
         HomePage_Objects.wishList(driver).click();
 
@@ -112,7 +107,7 @@ public class Home_Page_Test {
 
     @Test
     public void basketIcon() {
-        driver.get("https://www.coastfashion.com/");
+
         HomePage_Objects.shopingBasket(driver).isDisplayed();
         HomePage_Objects.shopingBasket(driver).click();
 
@@ -131,6 +126,7 @@ public class Home_Page_Test {
 
     @Test
     public void mega_Menu_Sale() {
+
         Actions builder = new Actions(driver);
         driver.get("https://www.coastfashion.com/");
 
@@ -160,7 +156,6 @@ public class Home_Page_Test {
     public void mega_Menu_NewIn() {
 
         Actions builder = new Actions(driver);
-        driver.get("https://www.coastfashion.com/");
 
         //Navigate to skirt in Sale
         builder.moveToElement(HomePage_Objects.megMen_NewIN(driver)).moveToElement(HomePage_Objects.megMen_NewIn_dresses(driver)).build().perform();
@@ -191,7 +186,6 @@ public class Home_Page_Test {
     @Test
     public void Footer_Links() {
 
-        driver.get("https://www.coastfashion.com/");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 
@@ -215,7 +209,6 @@ public class Home_Page_Test {
     @Test
     public void Splash_Boxes() {
 
-        driver.get("https://www.coastfashion.com/");
         HomePage_Objects.big_splash_Advert(driver).click();
         String title = driver.getTitle();
         Assert.assertEquals(title,"All Clothing | Coast");

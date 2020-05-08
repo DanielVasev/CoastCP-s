@@ -23,7 +23,7 @@ public class HomePage_Objects {
         return element;
     }
     public static WebElement countrySelector(WebDriver driver){
-        element = driver.findElement(By.cssSelector("#wrapper > div.sticky-spacer.js-sticky-spacer > div > div.sticky-spacer.js-sticky-spacer > div > div > div > div.js-header-right-box.header-right-box > div.header-countryselector.hidden-on-mobile.js-country-selector.flag-icon-circle > div > div > i"));
+        element = driver.findElement(By.xpath("//i[@class='flag-icon flag-icon-gb']"));
         return element;
     }
     public static WebElement user_Profile(WebDriver driver){
