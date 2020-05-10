@@ -1,6 +1,7 @@
 package TEST;
 
 import POM.HomePage_Objects;
+import POM.Main_Objects;
 import POM.PLP_Element_Objects;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,6 +28,13 @@ public class PLP_Test {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.MICROSECONDS.SECONDS);
         driver.get(plpDresses_Page);
+        if (Main_Objects.welcomeMess(driver).isDisplayed()) {
+            try {
+                Main_Objects.welcomeMess(driver).click();
+            } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+                Main_Objects.welcomeMess(driver).click();
+            }
+        }
 
     }
 
@@ -104,8 +112,7 @@ public class PLP_Test {
 
         TimeUnit.MILLISECONDS.sleep(1000);
         Actions builder = new Actions(driver);
-        WebElement next_prod = driver.findElement(By.xpath("//li[@class='grid-tile']//div[@id='2e7bad6924c3892cfa66eda93b']//img[@class='js-required ampliance-image']"));
-        builder.moveToElement(next_prod).build().perform();
+        builder.moveToElement(PLP_Element_Objects.plp_next_Product(driver)).build().perform();
 
         TimeUnit.MILLISECONDS.sleep(1000);
         builder.moveToElement(PLP_Element_Objects.plp_next_Product(driver)).moveToElement(PLP_Element_Objects.PLP_QuichView_Button(driver)).build().perform();

@@ -1,5 +1,7 @@
 package TEST;
 
+import POM.HomePage_Objects;
+import POM.Main_Objects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +10,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,6 +42,8 @@ class HomePageTest {
 //    }
 
 
+
+
     //Time Sleep
 
     //TimeUnit.SECONDS.sleep(1);
@@ -53,15 +59,27 @@ class HomePageTest {
 
     //HOVER WITH MOUSE OVER ELEMENT
     //
-    public static void Hover(WebDriver driver, WebElement element){
+    public static void Hover(WebDriver driver, WebElement element) {
         Actions builder = new Actions(driver);
         builder.moveToElement(element).perform();
 
     }
 
+    public static void CloseWelMessage(WebDriver driver, WebElement element) {
+        Actions builder = new Actions(driver);
+
+        if (Main_Objects.welcomeMess(driver).isDisplayed())
+        try {
+            Main_Objects.welcomeMess(driver).click();
+        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+            Main_Objects.welcomeMess(driver).click();
+        }
+
+
+    }
+
     //Actions builder = new Actions(driver);
     //builder.moveToElement(HomePage_Objects.megMen_Sale(driver)).moveToElement(HomePage_Objects.megMen_Sale_skirts(driver)).build().perform();
-
 
 
 }

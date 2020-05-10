@@ -8,6 +8,15 @@ public class PLP_Element_Objects {
     static WebDriver driver = null;
     private static WebElement element;
 
+
+
+    public static WebElement nextProd(WebDriver driver){
+        element = driver.findElement(By.xpath("//li[@class='grid-tile']//div[@id='2e7bad6924c3892cfa66eda93b']//img[@class='js-required ampliance-image']"));
+        return element;
+
+    }
+
+
     public static WebElement pagination_next(WebDriver driver) {
         element = driver.findElement(By.xpath("//div[@class='search-result-options hidden-on-tablet-portrait hidden-on-mobile']//span[contains(text(),'Next')]"));
         return element;
@@ -34,7 +43,7 @@ public class PLP_Element_Objects {
     }
 
     public static WebElement product_price(WebDriver driver){
-        element = driver.findElement(By.xpath("//div[@id='2e7bad6924c3892cfa66eda93b']//span[@class='product-sales-price'][contains(text(),'£41.40')]"));
+        element = driver.findElement(By.xpath("//div[@id='32bec479c987f51077a706a79e']//span[@class='product-sales-price'][contains(text(),'£59.50')]"));
         return element;
     }
 

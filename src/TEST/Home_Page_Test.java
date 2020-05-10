@@ -1,9 +1,11 @@
 package TEST;
 
 import POM.HomePage_Objects;
+import POM.Main_Objects;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.SourceType;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -15,6 +17,7 @@ public class Home_Page_Test {
     public WebDriver driver = null;
 
 
+
     @BeforeTest
     public void setUpTest() {
 
@@ -23,6 +26,13 @@ public class Home_Page_Test {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.MICROSECONDS.SECONDS);
         driver.get("https://www.coastfashion.com/");
+        if (Main_Objects.welcomeMess(driver).isDisplayed()) {
+            try {
+                Main_Objects.welcomeMess(driver).click();
+            } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+                Main_Objects.welcomeMess(driver).click();
+            }
+        }
 
     }
 
@@ -30,26 +40,26 @@ public class Home_Page_Test {
     public void navigate_To_HomePage() {
 
         String title = driver.getTitle();
-        if (title.equals("Women’s Clothing & Fashion")) ;
-        System.out.println(title);
+        Assert.assertEquals(title,"Women’s Occasionwear | Women’s Clothing & Fashion | Coast");
 
     }
 
     @Test
-    public void check_For_SearchIcon() {
+    public void check_For_SearchIcon() throws InterruptedException {
         String title = "Search";
 
-        HomePage_Objects.search(driver).click();
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+
+            HomePage_Objects.search(driver).click();
+            HomePage_Objects.search_Field(driver).sendKeys("Dress");
+            HomePage_Objects.search_Field(driver).sendKeys(Keys.RETURN);
+
+           // TimeUnit.MILLISECONDS.sleep(1000);
+
         }
 
-        HomePage_Objects.search_Field(driver).sendKeys("Dress");
-        HomePage_Objects.search_Field(driver).sendKeys(Keys.RETURN);
 
-    }
+
+
 
     @Test
     public void countrySelector() {
@@ -229,6 +239,8 @@ public class Home_Page_Test {
         Assert.assertEquals(title, "Bridesmaid Dresses and Outfits | Coast");
 
     }
+
+
 
     @AfterTest
     public void afterTest() {
