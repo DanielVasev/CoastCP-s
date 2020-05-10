@@ -65,21 +65,9 @@ class HomePageTest {
 
     }
 
-    public static void CloseWelMessage(WebDriver driver, WebElement element) {
-        Actions builder = new Actions(driver);
-
-        if (Main_Objects.welcomeMess(driver).isDisplayed())
-        try {
-            Main_Objects.welcomeMess(driver).click();
-        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
-            Main_Objects.welcomeMess(driver).click();
-        }
-
-
     }
 
     //Actions builder = new Actions(driver);
     //builder.moveToElement(HomePage_Objects.megMen_Sale(driver)).moveToElement(HomePage_Objects.megMen_Sale_skirts(driver)).build().perform();
 
 
-}

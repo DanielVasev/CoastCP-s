@@ -51,7 +51,7 @@ public class HomePage_Objects {
         return element;
     }
     public static WebElement megMen_Sale_skirts(WebDriver driver){
-        element = driver.findElement(By.xpath("/html[1]/body[1]/div[2]/div[4]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/a[1]/span[1]"));
+        element = driver.findElement(By.xpath("//a[contains(text(),'Sale Skirts')]"));
         return element;
     }
     public static WebElement megMen_Sale_curve(WebDriver driver){

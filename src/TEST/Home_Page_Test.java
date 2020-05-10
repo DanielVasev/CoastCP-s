@@ -21,11 +21,14 @@ public class Home_Page_Test {
     @BeforeTest
     public void setUpTest() {
 
+        //Path to my chromeDriver
         String projectPath = System.setProperty("webdriver.chrome.driver", "D:\\STUDING\\JAVA\\Automation\\Driver_Jars\\ChromeDriver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.MICROSECONDS.SECONDS);
+        driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MICROSECONDS);
+        //Page we can test in all tests under
         driver.get("https://www.coastfashion.com/");
+        // Close welcome message if is there
         if (Main_Objects.welcomeMess(driver).isDisplayed()) {
             try {
                 Main_Objects.welcomeMess(driver).click();
@@ -46,20 +49,14 @@ public class Home_Page_Test {
 
     @Test
     public void check_For_SearchIcon() throws InterruptedException {
-        String title = "Search";
-
 
             HomePage_Objects.search(driver).click();
             HomePage_Objects.search_Field(driver).sendKeys("Dress");
             HomePage_Objects.search_Field(driver).sendKeys(Keys.RETURN);
 
-           // TimeUnit.MILLISECONDS.sleep(1000);
-
+             String title = driver.getTitle();
+            Assert.assertEquals(title,"Search");
         }
-
-
-
-
 
     @Test
     public void countrySelector() {
@@ -69,38 +66,31 @@ public class Home_Page_Test {
     }
 
     @Test
-    public void userAccount() {
+    public void userAccount() throws InterruptedException {
 
         HomePage_Objects.user_Profile(driver).isDisplayed();
         HomePage_Objects.user_Profile(driver).click();
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+       TimeUnit.MILLISECONDS.sleep(500);
 
         HomePage_Objects.logInIcon(driver).click();
+        String title_LogIn = driver.getTitle();
+        Assert.assertEquals(title_LogIn,"Log in to Your Account");
+
         driver.get("https://www.coastfashion.com/");
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        TimeUnit.MILLISECONDS.sleep(500);
 
         HomePage_Objects.user_Profile(driver).click();
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        TimeUnit.MILLISECONDS.sleep(500);
 
         HomePage_Objects.registerIcon(driver).click();
+        String title_registerIcon = driver.getTitle();
+        Assert.assertEquals(title_registerIcon,"Account Registration Page");
 
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        TimeUnit.MILLISECONDS.sleep(1000);
+
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         HomePage_Objects.footHelp_elem(driver).isDisplayed();
@@ -135,30 +125,31 @@ public class Home_Page_Test {
     }
 
     @Test
-    public void mega_Menu_Sale() {
+    public void mega_Menu_Sale() throws InterruptedException {
 
         Actions builder = new Actions(driver);
-        driver.get("https://www.coastfashion.com/");
+        //driver.get("https://www.coastfashion.com/");
+
+
+        TimeUnit.MILLISECONDS.sleep(500);
 
         //Navigate to skirt in Sale
         builder.moveToElement(HomePage_Objects.megMen_Sale(driver)).moveToElement(HomePage_Objects.megMen_Sale_skirts(driver)).build().perform();
-        //try {TimeUnit.SECONDS.sleep(3); } catch (InterruptedException e) { e.printStackTrace(); }
+
         HomePage_Objects.megMen_Sale_skirts(driver).click();
-        //try {TimeUnit.SECONDS.sleep(1); } catch (InterruptedException e) { e.printStackTrace(); };
+
+        TimeUnit.MILLISECONDS.sleep(500);
+
         String title_skirt = driver.getTitle();
-        if (title_skirt.equals("Sale Skirts | Coast")) {
-            System.out.println("Pass");
-        }
+        Assert.assertEquals(title_skirt,"Sale Skirts | Coast");
 
         //Navigate to curve in Sale
         builder.moveToElement(HomePage_Objects.megMen_Sale(driver)).moveToElement(HomePage_Objects.megMen_Sale_curve(driver)).build().perform();
-        //try {TimeUnit.SECONDS.sleep(3); } catch (InterruptedException e) { e.printStackTrace(); }
+
         HomePage_Objects.megMen_Sale_curve(driver).click();
-        //try {TimeUnit.SECONDS.sleep(1); } catch (InterruptedException e) { e.printStackTrace(); };
+
         String title_curve = driver.getTitle();
-        if (title_curve.equals("Sale Curve | Coast")) {
-            System.out.println("Pass");
-        }
+        Assert.assertEquals(title_curve,"Sale Curve | Coast");
 
     }
 
@@ -194,24 +185,21 @@ public class Home_Page_Test {
     }
 
     @Test
-    public void Footer_Links() {
+    public void Footer_Links() throws InterruptedException {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        TimeUnit.MILLISECONDS.sleep(500);
+
         HomePage_Objects.footHelp_elem(driver).isDisplayed();
         HomePage_Objects.footHelp_elem(driver).click();
 
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        String help_title = driver.getTitle();
+        Assert.assertEquals(help_title,"Customer Service | Track my Order | Contact Us at Coastfashion.com");
+
+        TimeUnit.MILLISECONDS.sleep(500);
+
 
 
     }
@@ -243,12 +231,10 @@ public class Home_Page_Test {
 
 
     @AfterTest
-    public void afterTest() {
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void afterTest() throws InterruptedException {
+        //Wait before close the session
+        TimeUnit.MILLISECONDS.sleep(2000);
+
         driver.close();
         driver.quit();
 
