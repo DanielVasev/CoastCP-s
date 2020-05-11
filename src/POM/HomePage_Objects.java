@@ -11,7 +11,7 @@ public class HomePage_Objects {
     private static WebElement element;
 
     public static WebElement logo(WebDriver driver){
-        element = driver.findElement(By.xpath("//div[@class='primary-logo']//a//*[local-name()='svg']"));
+        element = driver.findElement(By.xpath("//h1[@class='primary-logo']//a//*[local-name()='svg']"));
         return element;
     }
     public static WebElement search(WebDriver driver){

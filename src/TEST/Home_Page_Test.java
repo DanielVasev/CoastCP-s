@@ -17,7 +17,6 @@ public class Home_Page_Test {
     public WebDriver driver = null;
 
 
-
     @BeforeTest
     public void setUpTest() {
 
@@ -25,11 +24,15 @@ public class Home_Page_Test {
         String projectPath = System.setProperty("webdriver.chrome.driver", "D:\\STUDING\\JAVA\\Automation\\Driver_Jars\\ChromeDriver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MICROSECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         //Page we can test in all tests under
         driver.get("https://www.coastfashion.com/");
         // Close welcome message if is there
-        if (Main_Objects.welcomeMess(driver).isDisplayed()) {
+        if (HomePage_Objects.logo(driver).isDisplayed()) {
+
+            HomePage_Objects.logo(driver).click();
+
+        }else{
             try {
                 Main_Objects.welcomeMess(driver).click();
             } catch (org.openqa.selenium.StaleElementReferenceException ex) {
@@ -42,21 +45,22 @@ public class Home_Page_Test {
     @Test
     public void navigate_To_HomePage() {
 
+        driver.get("https://www.coastfashion.com/");
         String title = driver.getTitle();
-        Assert.assertEquals(title,"Women’s Occasionwear | Women’s Clothing & Fashion | Coast");
+        Assert.assertEquals(title, "Women’s Occasionwear | Women’s Clothing & Fashion | Coast");
 
     }
 
     @Test
     public void check_For_SearchIcon() throws InterruptedException {
 
-            HomePage_Objects.search(driver).click();
-            HomePage_Objects.search_Field(driver).sendKeys("Dress");
-            HomePage_Objects.search_Field(driver).sendKeys(Keys.RETURN);
+        HomePage_Objects.search(driver).click();
+        HomePage_Objects.search_Field(driver).sendKeys("Dress");
+        HomePage_Objects.search_Field(driver).sendKeys(Keys.RETURN);
 
-             String title = driver.getTitle();
-            Assert.assertEquals(title,"Search");
-        }
+        String title = driver.getTitle();
+        Assert.assertEquals(title, "Search");
+    }
 
     @Test
     public void countrySelector() {
@@ -71,25 +75,25 @@ public class Home_Page_Test {
         HomePage_Objects.user_Profile(driver).isDisplayed();
         HomePage_Objects.user_Profile(driver).click();
 
-       TimeUnit.MILLISECONDS.sleep(500);
+        // TimeUnit.MILLISECONDS.sleep(500);
 
         HomePage_Objects.logInIcon(driver).click();
         String title_LogIn = driver.getTitle();
-        Assert.assertEquals(title_LogIn,"Log in to Your Account");
+        Assert.assertEquals(title_LogIn, "Log in to Your Account");
 
         driver.get("https://www.coastfashion.com/");
 
-        TimeUnit.MILLISECONDS.sleep(500);
+        //  TimeUnit.MILLISECONDS.sleep(500);
 
         HomePage_Objects.user_Profile(driver).click();
 
-        TimeUnit.MILLISECONDS.sleep(500);
+        // TimeUnit.MILLISECONDS.sleep(500);
 
         HomePage_Objects.registerIcon(driver).click();
         String title_registerIcon = driver.getTitle();
-        Assert.assertEquals(title_registerIcon,"Account Registration Page");
+        Assert.assertEquals(title_registerIcon, "Account Registration Page");
 
-        TimeUnit.MILLISECONDS.sleep(1000);
+        //  TimeUnit.MILLISECONDS.sleep(1000);
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -141,7 +145,7 @@ public class Home_Page_Test {
         TimeUnit.MILLISECONDS.sleep(500);
 
         String title_skirt = driver.getTitle();
-        Assert.assertEquals(title_skirt,"Sale Skirts | Coast");
+        Assert.assertEquals(title_skirt, "Sale Skirts | Coast");
 
         //Navigate to curve in Sale
         builder.moveToElement(HomePage_Objects.megMen_Sale(driver)).moveToElement(HomePage_Objects.megMen_Sale_curve(driver)).build().perform();
@@ -149,7 +153,7 @@ public class Home_Page_Test {
         HomePage_Objects.megMen_Sale_curve(driver).click();
 
         String title_curve = driver.getTitle();
-        Assert.assertEquals(title_curve,"Sale Curve | Coast");
+        Assert.assertEquals(title_curve, "Sale Curve | Coast");
 
     }
 
@@ -164,19 +168,15 @@ public class Home_Page_Test {
         HomePage_Objects.megMen_NewIn_dresses(driver).click();
         //try {TimeUnit.SECONDS.sleep(1); } catch (InterruptedException e) { e.printStackTrace(); };
         String title_NewIn_dres = driver.getTitle();
-        if (title_NewIn_dres.equals("New In Dresses | Coast")) {
-            System.out.println("Pass");
-        }
 
+        Assert.assertEquals(title_NewIn_dres,"New In Dresses | Coast");
         //Navigate to curve in Sale
         builder.moveToElement(HomePage_Objects.megMen_NewIN(driver)).moveToElement(HomePage_Objects.megMen_NewIn_Tops(driver)).build().perform();
         //try {TimeUnit.SECONDS.sleep(3); } catch (InterruptedException e) { e.printStackTrace(); }
         HomePage_Objects.megMen_NewIn_Tops(driver).click();
         //try {TimeUnit.SECONDS.sleep(1); } catch (InterruptedException e) { e.printStackTrace(); };
         String title_newIn_topsss = driver.getTitle();
-        if (title_newIn_topsss.equals("Coast UK")) {
-            System.out.println("Pass");
-        }
+        Assert.assertEquals(title_newIn_topsss,"Coast UK");
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -196,10 +196,9 @@ public class Home_Page_Test {
         HomePage_Objects.footHelp_elem(driver).click();
 
         String help_title = driver.getTitle();
-        Assert.assertEquals(help_title,"Customer Service | Track my Order | Contact Us at Coastfashion.com");
+        Assert.assertEquals(help_title, "Customer Service | Track my Order | Contact Us at Coastfashion.com");
 
         TimeUnit.MILLISECONDS.sleep(500);
-
 
 
     }
@@ -209,7 +208,7 @@ public class Home_Page_Test {
 
         HomePage_Objects.big_splash_Advert(driver).click();
         String title = driver.getTitle();
-        Assert.assertEquals(title,"All Clothing | Coast");
+        Assert.assertEquals(title, "All Clothing | Coast");
 
         HomePage_Objects.logo(driver).click();
         HomePage_Objects.small_splash_Advert_centre(driver).click();
@@ -227,7 +226,6 @@ public class Home_Page_Test {
         Assert.assertEquals(title, "Bridesmaid Dresses and Outfits | Coast");
 
     }
-
 
 
     @AfterTest
