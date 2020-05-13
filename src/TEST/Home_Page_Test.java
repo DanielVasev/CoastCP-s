@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Home_Page_Test {
     public WebDriver driver = null;
+    String HomePage = "https://www.coastfashion.com/";
 
 
     @BeforeTest
@@ -45,7 +46,7 @@ public class Home_Page_Test {
     @Test
     public void navigate_To_HomePage() {
 
-        driver.get("https://www.coastfashion.com/");
+        driver.get(HomePage);
         String title = driver.getTitle();
         Assert.assertEquals(title, "Women’s Occasionwear | Women’s Clothing & Fashion | Coast");
 
@@ -66,7 +67,6 @@ public class Home_Page_Test {
     public void countrySelector() {
 
         HomePage_Objects.countrySelector(driver).isDisplayed();
-
     }
 
     @Test
@@ -75,25 +75,17 @@ public class Home_Page_Test {
         HomePage_Objects.user_Profile(driver).isDisplayed();
         HomePage_Objects.user_Profile(driver).click();
 
-        // TimeUnit.MILLISECONDS.sleep(500);
-
         HomePage_Objects.logInIcon(driver).click();
         String title_LogIn = driver.getTitle();
         Assert.assertEquals(title_LogIn, "Log in to Your Account");
 
         driver.get("https://www.coastfashion.com/");
 
-        //  TimeUnit.MILLISECONDS.sleep(500);
-
         HomePage_Objects.user_Profile(driver).click();
-
-        // TimeUnit.MILLISECONDS.sleep(500);
 
         HomePage_Objects.registerIcon(driver).click();
         String title_registerIcon = driver.getTitle();
         Assert.assertEquals(title_registerIcon, "Account Registration Page");
-
-        //  TimeUnit.MILLISECONDS.sleep(1000);
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -106,20 +98,16 @@ public class Home_Page_Test {
 
         HomePage_Objects.wishList(driver).isDisplayed();
         HomePage_Objects.wishList(driver).click();
+        String aTitle = driver.getTitle();
 
+        Assert.assertEquals(aTitle,"Log in to Your Account");
     }
 
     @Test
-    public void basketIcon() {
+    public void basketIcon() throws InterruptedException {
 
         HomePage_Objects.shopingBasket(driver).isDisplayed();
         HomePage_Objects.shopingBasket(driver).click();
-
-        try {
-            TimeUnit.SECONDS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -132,24 +120,17 @@ public class Home_Page_Test {
     public void mega_Menu_Sale() throws InterruptedException {
 
         Actions builder = new Actions(driver);
-        //driver.get("https://www.coastfashion.com/");
-
-
-        TimeUnit.MILLISECONDS.sleep(500);
 
         //Navigate to skirt in Sale
         builder.moveToElement(HomePage_Objects.megMen_Sale(driver)).moveToElement(HomePage_Objects.megMen_Sale_skirts(driver)).build().perform();
 
         HomePage_Objects.megMen_Sale_skirts(driver).click();
 
-        TimeUnit.MILLISECONDS.sleep(500);
-
         String title_skirt = driver.getTitle();
         Assert.assertEquals(title_skirt, "Sale Skirts | Coast");
 
         //Navigate to curve in Sale
         builder.moveToElement(HomePage_Objects.megMen_Sale(driver)).moveToElement(HomePage_Objects.megMen_Sale_curve(driver)).build().perform();
-
         HomePage_Objects.megMen_Sale_curve(driver).click();
 
         String title_curve = driver.getTitle();
@@ -164,19 +145,19 @@ public class Home_Page_Test {
 
         //Navigate to skirt in Sale
         builder.moveToElement(HomePage_Objects.megMen_NewIN(driver)).moveToElement(HomePage_Objects.megMen_NewIn_dresses(driver)).build().perform();
-        //try {TimeUnit.SECONDS.sleep(3); } catch (InterruptedException e) { e.printStackTrace(); }
+
         HomePage_Objects.megMen_NewIn_dresses(driver).click();
-        //try {TimeUnit.SECONDS.sleep(1); } catch (InterruptedException e) { e.printStackTrace(); };
+
         String title_NewIn_dres = driver.getTitle();
 
         Assert.assertEquals(title_NewIn_dres,"New In Dresses | Coast");
         //Navigate to curve in Sale
         builder.moveToElement(HomePage_Objects.megMen_NewIN(driver)).moveToElement(HomePage_Objects.megMen_NewIn_Tops(driver)).build().perform();
-        //try {TimeUnit.SECONDS.sleep(3); } catch (InterruptedException e) { e.printStackTrace(); }
+
         HomePage_Objects.megMen_NewIn_Tops(driver).click();
-        //try {TimeUnit.SECONDS.sleep(1); } catch (InterruptedException e) { e.printStackTrace(); };
+
         String title_newIn_topsss = driver.getTitle();
-        Assert.assertEquals(title_newIn_topsss,"Coast UK");
+        Assert.assertEquals(title_newIn_topsss,"New In Tops | Coast");
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
@@ -190,16 +171,11 @@ public class Home_Page_Test {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 
-        TimeUnit.MILLISECONDS.sleep(500);
-
         HomePage_Objects.footHelp_elem(driver).isDisplayed();
         HomePage_Objects.footHelp_elem(driver).click();
 
         String help_title = driver.getTitle();
         Assert.assertEquals(help_title, "Customer Service | Track my Order | Contact Us at Coastfashion.com");
-
-        TimeUnit.MILLISECONDS.sleep(500);
-
 
     }
 
@@ -226,7 +202,6 @@ public class Home_Page_Test {
         Assert.assertEquals(title, "Bridesmaid Dresses and Outfits | Coast");
 
     }
-
 
     @AfterTest
     public void afterTest() throws InterruptedException {

@@ -43,12 +43,12 @@ public class PLP_Element_Objects {
     }
 
     public static WebElement product_price(WebDriver driver){
-        element = driver.findElement(By.xpath("//div[@id='32bec479c987f51077a706a79e']//span[@class='product-sales-price'][contains(text(),'£59.50')]"));
+        element = driver.findElement(By.xpath("//div[@id='2e7bad6924c3892cfa66eda93b']//span[@class='product-sales-price'][contains(text(),'£39.50')]"));
         return element;
     }
 
     public static WebElement product_discount(WebDriver driver){
-        element = driver.findElement(By.xpath("//div[@id='2e7bad6924c3892cfa66eda93b']//span[@class='product-standard-price'][contains(text(),'£69.00')]"));
+        element = driver.findElement(By.xpath("//div[@id='2e7bad6924c3892cfa66eda93b']//span[@class='product-standard-price'][contains(text(),'£79.00')]"));
         return element;
     }
 
